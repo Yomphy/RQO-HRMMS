@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import scipy
 from scipy import signal
 import time
-from signal_far_process_new import complte_BVP_sig
 
 
 # hampel 奇异值滤波
@@ -33,6 +32,22 @@ def hampel_filter(data, win_size=20, n_sigma=3):
         else:
             filtered_data[i] = data[i]
     return filtered_data[::-1]
+
+def complte_BVP_sig(BVPs, stride, fps):
+    # 拼接完整BVP信号
+    stride_fp = int(stride * fps)
+    if len(BVPs[0].shape) == 1:
+        BVPs[0] = np.expand_dims(BVPs[0], axis=0)
+    bvp = BVPs[0][:, 0:stride_fp]
+    N = len(BVPs)
+    for n in range(1, N - 1):
+        if len(BVPs[n].shape) == 1:
+            BVPs[n] = np.expand_dims(BVPs[n], axis=0)
+        bvp = np.concatenate((bvp, BVPs[n][:, 0:stride_fp]), axis=1)  # 按第二个维度frames进行拼接
+    bvp = np.concatenate((bvp, BVPs[N - 1]), axis=1)  # 最后将最后一个窗信号完整的拼接上去
+    # for i in range(len(bvp)):
+    #     bvp[i, :] = (bvp[i, :] - np.min(bvp[i, :])) / (np.max(bvp[i, :]) - np.min(bvp[i, :]))      # BVP信号归一化
+    return bvp
 
 
 def road_hampel_filter(data, win_size=20, n_sigma=3):

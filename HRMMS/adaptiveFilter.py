@@ -1,8 +1,6 @@
 import padasip as pad
 import numpy as np
-import scipy.signal._savitzky_golay
 from scipy.signal import *
-import math
 
 # 仿射投影 AP
 def AP(d_sig, x_sig, length, **kwargs):

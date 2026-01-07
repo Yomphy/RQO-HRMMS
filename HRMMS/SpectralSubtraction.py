@@ -1,6 +1,6 @@
 import scipy
 import numpy as np
-from AMTC import *
+from HMM import *
 
 # 运动信号时频图做掩模与rPPG信号时频图相乘，直接置零
 # def Spectrum_sub(rppgs, speedx, speedy, speedz, stride, fps, wsize):
