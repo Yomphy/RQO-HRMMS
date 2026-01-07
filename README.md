@@ -26,7 +26,7 @@ This repository contains the main code for the paper **"Noise-Adaptive rPPG Fram
 - `opencv-python`
 - `matplotlib`
 - `pytorch`
-- pyVHR
+- `pyVHR`
 
 ## Usage
 
@@ -51,3 +51,4 @@ Run the relevant scripts for rPPG signal extraction:
 - Use `adaptiveFilters.py` to remove aperiodic noise.
 
 Finally, estimate the heart rate using `HMM.py`, which tracks heart rate trajectories.
+
